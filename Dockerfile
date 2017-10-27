@@ -6,7 +6,6 @@ MAINTAINER Rithu John <rithu.john@coreos.com>
 
 RUN apk add --no-cache --update alpine-sdk patch curl git
 
-COPY . /go/src/github.com/coreos/dex
 RUN \
   mkdir -p /go/src/github.com/coreos \
   && cd /go/src/github.com/coreos \
