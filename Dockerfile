@@ -4,10 +4,14 @@ MAINTAINER Ed Rooth <ed.rooth@coreos.com>
 MAINTAINER Lucas Servén <lucas.serven@coreos.com>
 MAINTAINER Rithu John <rithu.john@coreos.com>
 
-RUN apk add --no-cache --update alpine-sdk patch curl
+RUN apk add --no-cache --update alpine-sdk patch curl git
 
 COPY . /go/src/github.com/coreos/dex
-RUN cd /go/src/github.com/coreos/dex \
+RUN \
+  mkdir -p /go/src/github.com/coreos \
+  && cd /go/src/github.com/coreos \
+  && git clone https://github.com/coreos/dex \
+  && cd dex \
   && curl -o dex.patch https://github.com/kfox1111/dex/commit/60c9364fbfc831d610504b300582149682d30286.patch \
   && patch -p1 dex.patch \
   && make release-binary
